@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    defaultConfig {
+        applicationId "com.example.jessie.dietchartapp"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+           /* buildConfigField 'String', "ClientAccessToken", "236bacbc7cc74d2f8eef320bf2972417"
+            resValue 'string', "ClientAccessToken", "236bacbc7cc74d2f8eef320bf2972417"
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "ClientAccessToken", "236bacbc7cc74d2f8eef320bf2972417"
+            resValue 'string', "ClientAccessToken", "236bacbc7cc74d2f8eef320bf2972417"*/
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // Java V2
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/INDEX.LIST'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:24.2.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // Dialogflow SDK dependencies
+    implementation 'ai.api:sdk:2.0.7@aar'
+    implementation 'ai.api:libai:1.6.12'
+
+    // Java V2
+    implementation 'com.google.cloud:google-cloud-dialogflow:0.67.0-alpha'
+    // for Remote Procedure Call to avoid "No functional channel service provider found" error while creating SessionsClient
+    implementation 'io.grpc:grpc-okhttp:1.15.1'
+
+
+    testImplementation 'junit:junit:4.12'
+}
